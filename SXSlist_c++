@@ -167,10 +167,6 @@ public:
 		{
 			PushFront(x);
 		}
-		else if(pos == _tail)
-		{
-			PushBack(x);
-		}
 		else
 		{
 			SlistNode *tmp = new SlistNode(x);
