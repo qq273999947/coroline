@@ -176,6 +176,7 @@ public:
 			SlistNode *tmp = new SlistNode(x);
 			tmp->_next = pos;
 			tmp->_pre = pos->_pre;
+			tmp->_pre->_next = tmp;
 			tmp->_next->_pre = tmp;
 			
 		}
