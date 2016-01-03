@@ -108,7 +108,7 @@ private:
 		if(_size >= _capacity)
 		{
 			size_t NewCapacity = (_capacity * 2 > (_size + 1) )? _capacity * 2:(_size+1);
-			_array = (DataType *)realloc(_array,NewCapacity);
+			_array = (DataType *)realloc(_array,NewCapacity*sizeof(int));
 			_capacity = NewCapacity;
 			return _array;
 		}
