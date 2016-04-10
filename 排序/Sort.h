@@ -388,3 +388,90 @@ void MergrSort(int *a,size_t size)
 	delete[] tmp;
 	
 }
+//计数排序
+void CountSort(int *a,size_t size)
+{
+	assert(a);
+	// 确定范围
+	int max = a[0],min = a[0];
+	for(size_t i = 0;i < size;++i)
+	{
+		if(a[i] > max)
+			max = a[i];
+		if(a[i] < min)
+			min = a[i];
+	}
+
+	int range = max - min +1;
+	int *CountArray = new int[range];
+	memset(CountArray,0,sizeof(int)*range);
+	for(size_t i = 0;i < size;++i)
+	{
+		CountArray[a[i] - min]++;
+	}
+	size_t index = 0;
+	for(size_t i = 0;i < range;++i)
+	{
+		if(CountArray[i] != 0)
+		{
+			while(CountArray[i])
+			{
+				a[index++] = i + min;
+				CountArray[i]--;
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+//基数排序
+int GetMaxDigit(int *a,size_t size)
+{
+	int digit = 1;
+	int max = 10;
+	for(size_t i = 0;i < size;++i)
+	{
+		if(a[i] >= 10)
+		{
+			digit++;
+			max *= 10;
+		}
+	}
+	return digit;
+}
+void DigitSort(int *a,size_t size)
+{
+	assert(a);
+	int MaxDigit = GetMaxDigit(a,size);
+
+	int Count[10];
+	int Start[10];
+	int *Bucket = new int[size];
+
+	int bit = 1;
+	int digit = 0;
+	while(digit < MaxDigit)
+	{
+		memset(Count,0,sizeof(int)*10);
+		memset(Start,0,sizeof(int)*10);
+		for(size_t i = 0;i < size;++i)
+		{
+			int num = (a[i]/bit)%10;
+			Count[num]++;
+		}
+		for(size_t i = 1;i < 10;++i)
+		{
+			Start[i] = Count[i - 1] + Start[i - 1];
+		}
+		for(size_t i = 0;i < size; ++i)
+		{
+			int num = (a[i]/bit)%10;
+			Bucket[Start[num]++] = a[i];
+		}
+		memcpy(a,Bucket,sizeof(int)*size);
+		digit++ ;
+		bit *= 10;
+	}
+}
