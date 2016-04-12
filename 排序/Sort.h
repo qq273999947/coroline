@@ -447,7 +447,7 @@ void DigitSort(int *a,size_t size)
 	int MaxDigit = GetMaxDigit(a,size);
 
 	int Count[10];
-	int Start[10];
+	int *Start = new int[size];
 	int *Bucket = new int[size];
 
 	int bit = 1;
@@ -474,4 +474,6 @@ void DigitSort(int *a,size_t size)
 		digit++ ;
 		bit *= 10;
 	}
+	delete[] Start;
+	delete[]Bucket;
 }
