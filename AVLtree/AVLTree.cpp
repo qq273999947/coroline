@@ -12,6 +12,17 @@ void test()
 	}
 	t.InOrder();
 }
+void test2()
+{
+	AVLTree<int,int> t;
+	int a[]={4, 2, 6, 1, 3, 5, 15, 7, 16, 14};
+	for(int i = 0;i < sizeof(a)/sizeof(int);++i)
+	{
+		t.Insert(a[i],i);
+	}
+	t.InOrder();
+	cout<<"IsBalance?"<<t.IsBalance()<<endl;
+}
 int main()
 {
   test();

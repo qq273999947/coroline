@@ -221,15 +221,103 @@ protected:
 
 		parent = subL;
 	}
-	void RotateLR(Node*& parent)
-	{
-		RotateL(parent->_left);
-		RotateR(parent);
-	}
+// 	没有调节平衡因子：
+// 		void RotateLR(Node*& parent)
+// 	{
+// 		RotateL(parent->_left);
+// 		RotateR(parent);
+// 	}
+// 	void RotateRL(Node*& parent)
+// 	{
+// 		RotateR(parent->_right);
+// 		RotateL(parent);
+// 	}
+//	调节平衡因子：
 	void RotateRL(Node*& parent)
 	{
-		RotateR(parent->_right);
-		RotateL(parent);
+		Node *subR = parent->_right;
+		Node *subRL = subR->_left;
+		subR->_left = subRL->_right;
+
+		if (subRL->_right != NULL)
+		{
+			subRL->_right->_parent = subR;
+		}
+		subRL->_right = subR;
+		subR->_parent = subRL;
+
+		if (subRL->_bf == 0 || subRL->_bf == 1)
+		{
+			subR->_bf = 0;
+		}
+		else
+		{
+			subR->_bf = 1;
+		}
+
+		parent->_right = subRL->_left;
+
+		if (subRL->_left != NULL)
+		{
+			subRL->_left->_parent = parent;
+		}
+		subRL->_left = parent;
+		subRL->_parent = parent->_parent;
+		parent->_parent = subRL;
+		if (subRL->_bf == 0 || subRL->_bf == -1)
+		{
+			parent->_bf = 0;
+		}
+		else
+		{
+			parent->_bf = -1;
+		}
+		parent = subRL;
+		subRL->_bf = 0;
+	}
+
+	void RotateLR(Node*& parent)
+	{
+		Node *subL = parent->_left;
+		Node *subLR = subL->_right;
+		subL->_right = subLR->_left;
+
+		if (subLR->_left != NULL)
+		{
+			subLR->_left->_parent = subL;
+		}
+		subLR->_left = subL;
+		subL->_parent = subLR;
+
+		if (subLR->_bf == 0 || subLR->_bf == -1)
+		{
+			subL->_bf = 0;
+		}
+		else
+		{
+			subL->_bf = -1;
+		}
+
+		parent->_left = subLR->_right;
+
+		if (subLR->_right != NULL)
+		{
+			subLR->_right->_parent = parent;
+		}
+		subLR->_right = parent;
+		subLR->_parent = parent->_parent;
+		parent->_parent = subLR;
+		if (subLR->_bf == 0 || subLR->_bf == 1)
+		{
+			parent->_bf = 0;
+		}
+		else
+		{
+			parent->_bf = 1;
+		}
+		parent = subLR;
+		subLR->_bf = 0;
+
 	}
 protected:
     Node* _root;
