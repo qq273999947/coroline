@@ -18,7 +18,6 @@ private:
 	DataType _data;
 	SlistNode *_next;
 };
-
 class Slist
 {
 public:
@@ -69,7 +68,7 @@ public:
 			{
 				Clear();
 			}			
-		    _head = _tail = NULL;
+		   	 _head = _tail = NULL;
 			SlistNode *cur = s._head;
 			while (cur)
 			{
