@@ -14,8 +14,8 @@ int FindRoot(int *set,int child)
 void Combine(int *set,int root1,int root2)
 {
 	assert(set);
-	set[root1 - 1] += set[root2 -1];
-	set[root2] = root1 -1;
+	set[root1] += set[root2];
+	set[root2] = root1;
 }
 int FindFrinedsCircle(int n,int m,int r[][2])
 {
